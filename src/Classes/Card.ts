@@ -9,7 +9,6 @@ export class Card{
 
     // constructor takes type of action card if it is an action card else it takes null and number value and 
     constructor(color: Color, value: number, action: Action | null){
-        console.log("Card created");
         this.color = color;
         this.value = value;
         this.action = action;

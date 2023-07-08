@@ -13,7 +13,7 @@ export class Game{
             this.Players.push(new Player(()=>{console.log("taktik")}));
         }
         this.Deck = initializeCards();
-        console.log(this.Deck);
+        console.log(this.Deck.length);
     }
 }
 
@@ -34,6 +34,5 @@ const initializeCards = ():Card[] => {
         cards.push(new Card(CardColor, 12, Action.DrawTwo));
         cards.push(new Card(CardColor, 12, Action.DrawTwo));
     }
-
     return cards;
 }
