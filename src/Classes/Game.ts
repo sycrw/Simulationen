@@ -9,6 +9,7 @@ export class Game{
     LayedCards: Card[] = [];
     Deck: Card[] = [];
     winner: number|null = null;
+    round: number = 0;
     
     constructor(playersAmount: number, tactics: ((playerCards:Card[],LayedCards:Card[]) => number|null)[]){
         for(let i = 0; i < playersAmount; i++){
@@ -25,8 +26,13 @@ export class Game{
     }
 
     playGame(): number|null{
-        let round = 0;
         while(!this.checkWin(this.Players)){
+            if(this.Deck.length == 0){
+                this.Deck = this.LayedCards;
+                this.Deck = this.shuffle(this.Deck);
+                this.LayedCards = [];
+                this.LayedCards.push(this.Deck.pop()!);
+            }
             for(let i = 0; i < this.Players.length; i++){
                 const cardIndex = this.Players[i].calculateMove(this.Players[i].Cards, this.LayedCards);
                 if(cardIndex == null){
@@ -36,11 +42,10 @@ export class Game{
                     this.Players[i].Cards.splice(cardIndex, 1);
                 }
                 if(this.checkWin(this.Players)){
-                    console.log("Player " + (i+1) + " won!");
                     return i;
                 }
             }
-            round++;
+            this.round++;
         }
         return null;
 }
