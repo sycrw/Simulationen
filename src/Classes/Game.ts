@@ -14,6 +14,10 @@ export class Game{
         }
         this.Deck = initializeCards();
         console.log(this.Deck.length);
+        this.Deck = shuffle(this.Deck);
+        this.Players = initializePlayers(playersAmount, this.Deck);
+        this.LayedCards.push(this.Deck.pop()!);
+        console.log(this.Deck.length);
     }
 }
 
@@ -34,5 +38,34 @@ const initializeCards = ():Card[] => {
         cards.push(new Card(CardColor, 12, Action.DrawTwo));
         cards.push(new Card(CardColor, 12, Action.DrawTwo));
     }
+    for(let i = 0; i < 4; i++){
+        cards.push(new Card(null, 13, Action.Wild));
+        cards.push(new Card(null, 14, Action.DrawFour));
+    }
     return cards;
+}
+
+const shuffle = (array: Card[]): Card[] => {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+
+const initializePlayers = (playersAmount: number,Deck: Card[]): Player[] => {
+    let players: Player[] = [];
+    if(playersAmount < 2 || playersAmount > Deck.length/7){
+        throw new Error("Invalid amount of players");
+    }
+    for(let i = 0; i < playersAmount; i++){
+        players.push(new Player(()=>{console.log("taktik")}));
+        // give players cards
+        for(let j = 0; j < 7; j++){
+            players[i].Cards.push(Deck.pop()!);
+        }
+    }
+    return players;
 }
