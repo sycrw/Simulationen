@@ -5,11 +5,13 @@ import { randomTactic } from './Classes/Tactics';
 function simulation(){
     //create a error.txt file
     fs.writeFileSync('error.txt', "");
+    //create a log.txt file
+    fs.writeFileSync('log.txt', "");
 
     const startTime =  Date.now();
-    //run the simulation for 1000000 times
-    const interations =100;
-    const printInfoEvery = Math.floor(interations / 1000);
+    //run the simulation a 20 Million times
+    const interations = 200000;
+    const printInfoEvery = Math.floor(interations / 100000);
     let currentIteration = 0;
     const playersAmount = 2;
     const tactics = new Array(playersAmount).fill(randomTactic);
@@ -19,7 +21,8 @@ function simulation(){
         wins[i] = 0;
     }
     wins["error"] = 0;
- 
+    //write that simulation started to log.txt
+    fs.appendFileSync('log.txt', `Simulation started at ${new Date(startTime).toLocaleDateString() + " " + new Date(startTime).toLocaleTimeString() }\n`);
 
     for(let i = 0; i < interations; i++){
         try{
@@ -27,9 +30,8 @@ function simulation(){
         wins[game.winner!] += 1;
         currentIteration = i;
         if(currentIteration % printInfoEvery == 0){
-          // GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins);
+          GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins);
         }
-        console.log("--------------------");
         }
         catch(e){
             //write the error to error.txt
@@ -38,6 +40,18 @@ function simulation(){
             throw e;
         }
     }
+    //log results to log.txt with the amout of player, their wins and the tactics they used to win, and the time it took and the time it started, and the amount of iterations. In an easy to read format and logical order
+    fs.appendFileSync('simulations.txt', `Simulation with ${playersAmount} players finished at ${new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() }\n`);
+    fs.appendFileSync('simulations.txt', `Simulation started at ${new Date(startTime).toLocaleDateString() + " " + new Date(startTime).toLocaleTimeString() }\n`);
+    fs.appendFileSync('simulations.txt', `Time it took: ${Math.floor((Date.now() - startTime) / 1000 / 60 / 60)}h ${Math.floor((Date.now() - startTime) / 1000 / 60 - Math.floor((Date.now() - startTime) / 1000 / 60 / 60) * 60)}m ${Math.floor((Date.now() - startTime) / 1000 - Math.floor((Date.now() - startTime) / 1000 / 60) * 60)}s\n`);
+    fs.appendFileSync('simulations.txt', `Iterations: ${interations}\n`);
+    fs.appendFileSync('simulations.txt', `Wins: ${JSON.stringify(wins)}\n`);
+    for(let i = 0; i < playersAmount; i++){
+        fs.appendFileSync('simulations.txt', `Player(${tactics[i].name}) ${i + 1} won ${((wins[i] / interations) * 100).toFixed(2)}% of the games\n`);
+    }
+    fs.appendFileSync('simulations.txt', `The Simulation errored ${(wins["error"] / interations * 100).toFixed(2)}% of the times\n`);
+    fs.appendFileSync('simulations.txt', `\n`);
+
     //print out the results and the time it took in h m s
     console.log(`\nSimulation started at ${new Date(startTime).toLocaleDateString() + " " + new Date(startTime).toLocaleTimeString() }`);
     console.log(`Simulation finished at ${new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() }`);
@@ -47,6 +61,7 @@ function simulation(){
     for(let i = 0; i < playersAmount; i++){
         console.log(`Player ${i + 1} won ${((wins[i] / interations) * 100).toFixed(2)}% of the games`);
     }
+    
 }
 simulation();
 

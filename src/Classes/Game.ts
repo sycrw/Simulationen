@@ -27,13 +27,11 @@ export class Game{
             this.Deck = this.shuffle(this.Deck);
         }
         this.totalCards = this.Deck.length + this.Players.reduce((acc, player) => acc + player.Cards.length, 0);
-        console.log(`Total cards: ${this.totalCards}`);
         //start Cards list to compare if a card is lost
         this.startCardsList = this.Deck.concat();
         this.Players.forEach(player => {
             this.startCardsList = this.startCardsList.concat(JSON.parse(JSON.stringify(player.Cards)));
         });
-        console.log(this.startCardsList.length);
         this.LayedCards.push(this.Deck.pop()!);
         this.winner = this.playGame();
     }
@@ -43,11 +41,6 @@ export class Game{
         let direction = 1;
         while(!this.checkWin(this.Players)){
             this.checkHeath();
-            let playerCardCountLog = "";
-            this.Players.forEach((player, index) => {
-                playerCardCountLog += `Player ${index} has ${player.Cards.length} cards!`;
-            });
-            console.log(`On top of the deck is ${this.LayedCards[this.LayedCards.length-1].color} ${this.LayedCards[this.LayedCards.length-1].value} ${this.LayedCards[this.LayedCards.length-1].action}! ${playerCardCountLog}`);
             
 
             
@@ -63,28 +56,19 @@ export class Game{
                 }
                 );
             }
-            console.log(log);
-            console.log(`It is now ${currentPlayerIndex%this.Players.length}'s turn`);
 
-            console.log("Cards beginning of the round");
-            this.logCardAmount();
+
+
             //reshuffle the deck if there are no cards left
             if(this.Deck.length == 0){
                 this.resetDeck();
             }
-            console.log("Cards after potential reshuffle");
-            this.logCardAmount();
 
             const currentPlayer = this.Players[currentPlayerIndex%this.Players.length];
             const playerCardIndex = currentPlayer.calculateMove(currentPlayer.Cards, this.LayedCards,this.ActionCardRequirmentsHandler.requirements); // get the index of the card the player wants to play
             
             const playerCard = currentPlayer.Cards[playerCardIndex!];// get the card the player wants to play
-            if(playerCardIndex == null){
-                // console.log(`The player cant respond`);
-            }
-            else{
-               // console.log("The player wants to play the card with the index " + JSON.stringify(playerCard));
-            }
+    
             // check if the player has to be skipped or the direction has to be reversed
             if(this.ActionCardRequirmentsHandler.requirements[0] == Action.Skip){ // skip
 
@@ -107,10 +91,9 @@ export class Game{
                 continue;
             }
             //check if the requirements of the action card are met (draw 2 and 4 cards)
-            console.log("Cards Amout after reverse and skip: ");
-            this.logCardAmount();
 
-            // console.log(`The action card requirements are activated`);
+
+
             if(this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawTwo) || this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawFour)) {
                 const requirement = this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawTwo) ? Action.DrawTwo : Action.DrawFour;
 
@@ -144,8 +127,6 @@ export class Game{
                     continue;
                 }
             }
-            console.log("Cards Amout after draw 2 and 4: ");
-            this.logCardAmount();
 
             // check if all requirements are met
             if(this.ActionCardRequirmentsHandler.requirements.length != 0){
@@ -183,12 +164,9 @@ export class Game{
 
             this.round++;
             //empty line with empty line character
-            console.log(`round ${this.round} is over`);
 
             
         }
-        console.log(`The game is over`);
-        console.log(`The winner is ${this.Players[currentPlayerIndex]}`);
         return currentPlayerIndex;
 
 }
@@ -255,7 +233,6 @@ initializePlayers = (playersAmount: number,Deck: Card[],tactics:Tactic[]): Playe
 resetDeck = (): void => {
    //take the cards from the layed cards and put them back in the deck
    //make sure to keep the top card and reset the draw 4 and wild cards to color any
-    console.log(`The deck is empty!`);
     const topCard = this.LayedCards[this.LayedCards.length-1];
     this.Deck = this.Deck.concat(this.LayedCards);
     this.Deck.pop();
@@ -325,7 +302,7 @@ checkHeath = (): void => {
     totalCards += this.LayedCards.length;
 
 
-    console.log(`Total cards: Deck: ${this.Deck.length} Layed: ${this.LayedCards.length} Players: ${playersCards} Total: ${totalCards}`)
+
     if(totalCards != this.totalCards){
         //search which card is missing by comparing the cards to the startCardsList
         let startCardsList = this.startCardsList;
@@ -345,23 +322,11 @@ checkHeath = (): void => {
                     break;
                 }
             }
-            if(!found){
-                console.log(`Missing card: ${startCardsList[i].color} ${startCardsList[i].value} ${startCardsList[i].action}`);
-            }
         }
         throw new Error(`Total cards don't add up! ${totalCards} != ${this.totalCards}`);
     }
 
     
 }
-logCardAmount = (): void => {
-    let out = 0;
-    this.Players.forEach((player,i) => {
-        out += player.Cards.length;
-    }
-    );
-    out += this.Deck.length;
-    out += this.LayedCards.length;
-    console.log(`Total cards: ${out}`);
-}
+
 }
