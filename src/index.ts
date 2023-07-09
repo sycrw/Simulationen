@@ -1,25 +1,41 @@
 import { Game } from './Classes/Game';
+import fs from 'fs';
 import { randomTactic } from './Classes/Tactics';
 
 function simulation(){
+    //create a error.txt file
+    fs.writeFileSync('error.txt', "");
+
     const startTime =  Date.now();
     //run the simulation for 1000000 times
-    const interations = 300000000;
+    const interations =100;
     const printInfoEvery = Math.floor(interations / 1000);
     let currentIteration = 0;
-    const playersAmount = 10;
+    const playersAmount = 2;
     const tactics = new Array(playersAmount).fill(randomTactic);
     let wins:any = new Object();
     console.log(`\nStarting simulation with ${interations} iterations and ${playersAmount} players at ${new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() }`);
     for(let i = 0; i < playersAmount; i++){
         wins[i] = 0;
     }
+    wins["error"] = 0;
+ 
+
     for(let i = 0; i < interations; i++){
+        try{
         const game = new Game(playersAmount, tactics);
         wins[game.winner!] += 1;
         currentIteration = i;
         if(currentIteration % printInfoEvery == 0){
-           GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins);
+          // GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins);
+        }
+        console.log("--------------------");
+        }
+        catch(e){
+            //write the error to error.txt
+            fs.appendFileSync('error.txt', e + "\n");
+            wins["error"] += 1;
+            throw e;
         }
     }
     //print out the results and the time it took in h m s
