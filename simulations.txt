@@ -25,3 +25,21 @@ Player(randomTactic) 1 won 51.15% of the games
 Player(randomTactic) 2 won 48.85% of the games
 The Simulation errored 0.00% of the times
 
+Simulation with 2 players finished at 7/11/2023 4:19:30 PM
+Simulation started at 7/11/2023 4:19:17 PM
+Time it took: 0h 0m 13s
+Iterations: 200000
+Wins: {"0":102424,"1":97576,"error":0}
+Player(randomTactic) 1 won 51.21% of the games
+Player(randomTactic) 2 won 48.79% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/11/2023 4:24:10 PM
+Simulation started at 7/11/2023 4:19:47 PM
+Time it took: 0h 4m 22s
+Iterations: 5000000
+Wins: {"0":2555737,"1":2444263,"error":0}
+Player(randomTactic) 1 won 51.11% of the games
+Player(randomTactic) 2 won 48.89% of the games
+The Simulation errored 0.00% of the times
+

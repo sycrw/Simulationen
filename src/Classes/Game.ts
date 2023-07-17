@@ -17,9 +17,6 @@ export class Game{
     
 
     constructor(playersAmount: number, tactics: ((playerCards:Card[],LayedCards:Card[]) => number|null)[]){
-        for(let i = 0; i < playersAmount; i++){
-            this.Players.push(new Player(tactics[i]));
-        }
         this.Deck = this.initializeCards();
         this.Deck = this.shuffle(this.Deck);
         this.Players = this.initializePlayers(playersAmount, this.Deck, tactics);
@@ -315,10 +312,8 @@ checkHeath = (): void => {
         );
         // search for the missing card
         for(let i = 0; i < startCardsList.length; i++){
-            let found = false;
             for(let j = 0; j < cardsList.length; j++){
                 if(startCardsList[i].color == cardsList[j].color && startCardsList[i].value == cardsList[j].value && startCardsList[i].action == cardsList[j].action){
-                    found = true;
                     break;
                 }
             }
