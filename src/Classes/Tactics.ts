@@ -49,6 +49,17 @@ export const firstCard = (playerCards:Card[],LayedCards:Card[],requirements:stri
     // first card that matches the color
     for(let i = 0; i < playerCards.length; i++){
         if(playerCards[i]?.color == LayedCards[LayedCards.length-1].color || playerCards[i]?.value == LayedCards[LayedCards.length-1].value || playerCards[i]?.color == Color.Any){
+            //if value = -1 any action card can be played on any action card so there the color has to be the same
+            if(playerCards[i]?.value == -1 ){
+                if(playerCards[i]?.color == LayedCards[LayedCards.length-1].color || playerCards[i]?.color == Color.Any){
+                    cardIndex = i;
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+            
             cardIndex = i;
         }
     }
@@ -144,4 +155,3 @@ export const keepManyColors = (playerCards:Card[],LayedCards:Card[],requirements
 export const alwaysDraw = (playerCards:Card[],LayedCards:Card[],requirements:string[]):number|null => {
     return null;
 }
-

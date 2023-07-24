@@ -49,6 +49,7 @@ export class Game{
 
 
         while(!this.checkWin(this.Players)){
+            this.round++;
             if(this.log){
                 console.log("--------------------");
                 console.log(`\nRound ${this.round}`);
@@ -142,13 +143,26 @@ export class Game{
                 }
                 //check if the drawn card can be played
                 if(drawnCard.color === Color.Any || drawnCard.color == this.LayedCards[this.LayedCards.length-1].color || drawnCard.value == this.LayedCards[this.LayedCards.length-1].value || drawnCard.action == Action.Wild || drawnCard.action == Action.DrawFour){
+                    if(drawnCard.action == Action.DrawFour){
+                        let colorIndex = Math.floor(Math.random()*4); //TODO make the AI choose the color
+                        drawnCard.color = numToColor(colorIndex);
+                    }else if(drawnCard.action == Action.Wild){
+                        let colorIndex = Math.floor(Math.random()*4);
+                        drawnCard.color = numToColor(colorIndex);
+                    }
+                    if(drawnCard.value == -1){
+                        if(drawnCard.color == this.LayedCards[this.LayedCards.length-1].color || drawnCard.color == Color.Any){
+                            //lay the card
+                            currentPlayer.Cards.push(drawnCard);
+                        }
+                    }
                     currentPlayer.Cards.push(drawnCard);
                     this.layCard(currentPlayerIndex, currentPlayer.Cards.length-1);
+                    if(this.log){
+                        console.log(`Player could play the card he drew`);
+                    }
                 }else{
                     currentPlayer.Cards.push(drawnCard);
-                    if(this.log){
-                        console.log(`Player could lay the card he drew`);
-                    }
                 }
             }else{ // if the player can play a card
                 if(playerCard.action == Action.DrawFour || playerCard.action == Action.DrawTwo || playerCard.action == Action.Skip || playerCard.action == Action.Reverse){
@@ -160,23 +174,14 @@ export class Game{
                 }
                 this.layCard(currentPlayerIndex, playerCardIndex);
             }
-            
-
             //check if the player has won
             if(this.checkWin(this.Players)){
                 return currentPlayerIndex;
             }
-           
-
             currentPlayerIndex = (currentPlayerIndex + direction)%this.Players.length;
             if(currentPlayerIndex == -1){
                 currentPlayerIndex = this.Players.length-1;
             }
-            
-
-            this.round++;
-            //empty line with empty line character
-
             
         }
         return currentPlayerIndex;
