@@ -16,10 +16,11 @@ export class Game{
     startCardsList: Card[] = [];
     
 
-    constructor(playersAmount: number, tactics: ((playerCards:Card[],LayedCards:Card[]) => number|null)[]){
+    constructor(playersAmount: number, tactics: ((playerCards:Card[],LayedCards:Card[]) => number|null)[],public log:boolean){
         this.Deck = this.initializeCards();
         this.Deck = this.shuffle(this.Deck);
         this.Players = this.initializePlayers(playersAmount, this.Deck, tactics);
+        this.log=log;
         while(this.Deck[this.Deck.length-1].action != null){
             this.Deck = this.shuffle(this.Deck);
         }
@@ -36,26 +37,25 @@ export class Game{
     playGame (): number|null{
         let currentPlayerIndex = 0;
         let direction = 1;
-        while(!this.checkWin(this.Players)){
-            this.checkHeath();
-            
-
-            
-            // log the game state
-            let log = "";
-            for(let i = 0; i < this.Players.length; i++){
-                log += `Player ${i}: `;
-                this.Players[i].Cards.forEach(card => {
-                    let color = card?.color;
-                    let value = card?.value;
-                    let action = card?.action;
-                    log += `${color} ${value} ${action} | `;
-                }
-                );
+        if(this.log){
+            console.log(`\nStarting game with ${this.Players.length} players`);
+            console.log("top card: " + JSON.stringify(this.LayedCards[this.LayedCards.length-1]));
+            console.log("players:");
+            this.Players.forEach((player,i) => {
+                console.log(`${i} has ${player.Cards.length} cards and uses ${player.calculateMove.name}`);
             }
+            );
+        }
 
 
-
+        while(!this.checkWin(this.Players)){
+            if(this.log){
+                console.log("--------------------");
+                console.log(`\nRound ${this.round}`);
+                console.log("top card: " + JSON.stringify(this.LayedCards[this.LayedCards.length-1]));
+                console.log(`Player ${currentPlayerIndex} has ${this.Players[currentPlayerIndex].Cards.length} cards`);
+            }
+            this.checkHeath();
             //reshuffle the deck if there are no cards left
             if(this.Deck.length == 0){
                 this.resetDeck();
@@ -69,6 +69,9 @@ export class Game{
             // check if the player has to be skipped or the direction has to be reversed
             if(this.ActionCardRequirmentsHandler.requirements[0] == Action.Skip){ // skip
 
+                if(this.log){
+                    console.log(`Player ${currentPlayerIndex} has to skip`);
+                }
                 currentPlayerIndex = (currentPlayerIndex + direction)%this.Players.length;
                 if(currentPlayerIndex == -1){
                     currentPlayerIndex = this.Players.length-1;
@@ -78,7 +81,9 @@ export class Game{
                 continue;
                 
             }else if(this.ActionCardRequirmentsHandler.requirements[0] == Action.Reverse){ // reverse
-
+                if(this.log){
+                    console.log(`The direction has been reversed! Player ${currentPlayerIndex} has lost his turn`);
+                }
                 direction *= -1;
                 currentPlayerIndex = (currentPlayerIndex + direction)%this.Players.length;
                 if(currentPlayerIndex == -1){
@@ -88,16 +93,12 @@ export class Game{
                 continue;
             }
             //check if the requirements of the action card are met (draw 2 and 4 cards)
-
-
-
             if(this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawTwo) || this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawFour)) {
                 const requirement = this.ActionCardRequirmentsHandler.requirements.includes(Action.DrawTwo) ? Action.DrawTwo : Action.DrawFour;
 
                 if(playerCardIndex == null || playerCard.action != requirement) {
                     const amount = this.ActionCardRequirmentsHandler.requirements.filter(action => action == requirement).length;
                     const AmounttoDraw = (requirement == Action.DrawTwo ? 2 : 4)*amount;
-
                     for(let i = 0; i < AmounttoDraw; i++){
                         if(this.Deck.length == 0){
                             this.resetDeck();
@@ -110,17 +111,22 @@ export class Game{
                     if(currentPlayerIndex == -1){
                         currentPlayerIndex = this.Players.length-1;
                     }
+                    if(this.log){
+                        console.log(`Player ${currentPlayerIndex} has to draw ${AmounttoDraw} cards and has lost his turn`);
+                    }
                     continue;
                 }
                 else{
-
-
                     this.ActionCardRequirmentsHandler.requirements.push(playerCard.action);
                     this.layCard(currentPlayerIndex, playerCardIndex);
                     currentPlayerIndex = (currentPlayerIndex + direction)%this.Players.length;
                     if(currentPlayerIndex == -1){
                         currentPlayerIndex = this.Players.length-1;
                     }
+                    if(this.log){
+                        console.log(`Player ${currentPlayerIndex} layed another draw ${requirement} card`);
+                    }
+
                     continue;
                 }
             }
@@ -131,17 +137,26 @@ export class Game{
             }
             if(playerCardIndex == null){ // if the player has to draw a card because he can't play a card
                 const drawnCard = this.Deck.pop()!;
+                if(this.log){
+                    console.log(`Player ${currentPlayerIndex} has to draw a card and has drawn ${JSON.stringify(drawnCard)}`);
+                }
                 //check if the drawn card can be played
                 if(drawnCard.color === Color.Any || drawnCard.color == this.LayedCards[this.LayedCards.length-1].color || drawnCard.value == this.LayedCards[this.LayedCards.length-1].value || drawnCard.action == Action.Wild || drawnCard.action == Action.DrawFour){
                     currentPlayer.Cards.push(drawnCard);
                     this.layCard(currentPlayerIndex, currentPlayer.Cards.length-1);
                 }else{
                     currentPlayer.Cards.push(drawnCard);
+                    if(this.log){
+                        console.log(`Player could lay the card he drew`);
+                    }
                 }
             }else{ // if the player can play a card
                 if(playerCard.action == Action.DrawFour || playerCard.action == Action.DrawTwo || playerCard.action == Action.Skip || playerCard.action == Action.Reverse){
                     this.ActionCardRequirmentsHandler.isActivated = true;
                     this.ActionCardRequirmentsHandler.requirements = [playerCard.action];
+                }
+                if(this.log){
+                    console.log(`Player ${currentPlayerIndex} layed ${JSON.stringify(playerCard)}`);
                 }
                 this.layCard(currentPlayerIndex, playerCardIndex);
             }

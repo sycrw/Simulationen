@@ -1,4 +1,4 @@
-import { alwaysDraw, firstCard, keepAllActionCards, keepManyColors, layAllActionCards } from './Classes/Tactics';
+import { alwaysDraw, firstCard, keepManyColors } from './Classes/Tactics';
 
 import { Game } from './Classes/Game';
 import { Tactic } from './types';
@@ -12,13 +12,12 @@ function simulation(){
 
     const startTime =  Date.now();
     //run the simulation a 20 Million times
-    const interations = 5000000;
+    const interations = 1;
     const printInfoEvery = Math.floor(interations / 100000);
     let currentIteration = 0;
     const playersAmount = 2;
     const tactics = new Array(playersAmount).fill(firstCard);
-    tactics[0] = keepAllActionCards;
-    tactics[1] = layAllActionCards;
+
 
     let wins:any = new Object();
     console.log(`\nStarting simulation with ${interations} iterations and ${playersAmount} players at ${new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() }`);
@@ -31,7 +30,7 @@ function simulation(){
 
     for(let i = 0; i < interations; i++){
         try{
-        const game = new Game(playersAmount, tactics);
+        const game = new Game(playersAmount, tactics,true);
         wins[game.winner!] += 1;
         currentIteration = i;
         if(currentIteration % printInfoEvery == 0){
