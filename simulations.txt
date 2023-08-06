@@ -61,3 +61,568 @@ Player(firstCard) 1 won 0.00% of the games
 Player(firstCard) 2 won 100.00% of the games
 The Simulation errored 0.00% of the times
 
+Simulation with 2 players finished at 7/30/2023 9:28:21 AM
+Simulation started at 7/30/2023 9:28:21 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:28:25 AM
+Simulation started at 7/30/2023 9:28:25 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:28:27 AM
+Simulation started at 7/30/2023 9:28:27 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:28:39 AM
+Simulation started at 7/30/2023 9:28:39 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:35:48 AM
+Simulation started at 7/30/2023 9:35:48 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:36:28 AM
+Simulation started at 7/30/2023 9:36:28 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:41:26 AM
+Simulation started at 7/30/2023 9:41:26 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:50:11 AM
+Simulation started at 7/30/2023 9:50:11 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:52:13 AM
+Simulation started at 7/30/2023 9:52:13 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 9:52:21 AM
+Simulation started at 7/30/2023 9:52:21 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:06:15 AM
+Simulation started at 7/30/2023 10:06:15 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"2":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+Player(firstCard) 3 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:06:23 AM
+Simulation started at 7/30/2023 10:06:23 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"2":0,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+Player(firstCard) 3 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:11:20 AM
+Simulation started at 7/30/2023 10:11:20 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"2":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+Player(firstCard) 3 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:15:53 AM
+Simulation started at 7/30/2023 10:15:53 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":0,"2":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+Player(firstCard) 3 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:15:56 AM
+Simulation started at 7/30/2023 10:15:56 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"2":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+Player(firstCard) 3 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:15:58 AM
+Simulation started at 7/30/2023 10:15:58 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":0,"2":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+Player(firstCard) 3 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:17:29 AM
+Simulation started at 7/30/2023 10:17:27 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":188,"1":167,"2":166,"error":479}
+Player(firstCard) 1 won 18.80% of the games
+Player(firstCard) 2 won 16.70% of the games
+Player(firstCard) 3 won 16.60% of the games
+The Simulation errored 47.90% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:17:38 AM
+Simulation started at 7/30/2023 10:17:37 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":193,"1":134,"2":174,"error":499}
+Player(firstCard) 1 won 19.30% of the games
+Player(firstCard) 2 won 13.40% of the games
+Player(firstCard) 3 won 17.40% of the games
+The Simulation errored 49.90% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:17:43 AM
+Simulation started at 7/30/2023 10:17:42 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":148,"1":175,"2":165,"error":512}
+Player(firstCard) 1 won 14.80% of the games
+Player(firstCard) 2 won 17.50% of the games
+Player(firstCard) 3 won 16.50% of the games
+The Simulation errored 51.20% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:17:46 AM
+Simulation started at 7/30/2023 10:17:45 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":185,"1":165,"2":165,"error":485}
+Player(firstCard) 1 won 18.50% of the games
+Player(firstCard) 2 won 16.50% of the games
+Player(firstCard) 3 won 16.50% of the games
+The Simulation errored 48.50% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:17:50 AM
+Simulation started at 7/30/2023 10:17:49 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":193,"1":154,"2":162,"error":491}
+Player(firstCard) 1 won 19.30% of the games
+Player(firstCard) 2 won 15.40% of the games
+Player(firstCard) 3 won 16.20% of the games
+The Simulation errored 49.10% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:23:05 AM
+Simulation started at 7/30/2023 10:23:03 AM
+Time it took: 0h 0m 2s
+Iterations: 1000
+Wins: {"0":318,"1":335,"2":347,"error":0}
+Player(firstCard) 1 won 31.80% of the games
+Player(firstCard) 2 won 33.50% of the games
+Player(firstCard) 3 won 34.70% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:26:26 AM
+Simulation started at 7/30/2023 10:26:23 AM
+Time it took: 0h 0m 2s
+Iterations: 1000
+Wins: {"0":345,"1":323,"2":332,"error":0}
+Player(firstCard) 1 won 34.50% of the games
+Player(firstCard) 2 won 32.30% of the games
+Player(firstCard) 3 won 33.20% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:26:40 AM
+Simulation started at 7/30/2023 10:26:40 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"2":0,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+Player(firstCard) 3 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:26:55 AM
+Simulation started at 7/30/2023 10:26:55 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":1,"2":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+Player(firstCard) 3 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 3 players finished at 7/30/2023 10:40:08 AM
+Simulation started at 7/30/2023 10:40:08 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":1,"2":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+Player(firstCard) 3 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:40:29 AM
+Simulation started at 7/30/2023 10:40:29 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":2,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:43:00 AM
+Simulation started at 7/30/2023 10:43:00 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:43:52 AM
+Simulation started at 7/30/2023 10:43:52 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":2,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:50:18 AM
+Simulation started at 7/30/2023 10:50:18 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:50:19 AM
+Simulation started at 7/30/2023 10:50:19 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:50:54 AM
+Simulation started at 7/30/2023 10:50:54 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":2,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:51:36 AM
+Simulation started at 7/30/2023 10:51:36 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:51:38 AM
+Simulation started at 7/30/2023 10:51:38 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:51:53 AM
+Simulation started at 7/30/2023 10:51:53 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:51:56 AM
+Simulation started at 7/30/2023 10:51:56 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:51:59 AM
+Simulation started at 7/30/2023 10:51:59 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:53:37 AM
+Simulation started at 7/30/2023 10:53:37 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:53:40 AM
+Simulation started at 7/30/2023 10:53:40 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:55:21 AM
+Simulation started at 7/30/2023 10:55:21 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":0,"1":2,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:55:25 AM
+Simulation started at 7/30/2023 10:55:25 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:57:07 AM
+Simulation started at 7/30/2023 10:57:07 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":2,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 10:57:10 AM
+Simulation started at 7/30/2023 10:57:10 AM
+Time it took: 0h 0m 0s
+Iterations: 2
+Wins: {"0":1,"1":1,"error":0}
+Player(firstCard) 1 won 50.00% of the games
+Player(firstCard) 2 won 50.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:13:30 AM
+Simulation started at 7/30/2023 11:13:28 AM
+Time it took: 0h 0m 1s
+Iterations: 1000
+Wins: {"0":271,"1":265,"error":464}
+Player(firstCard) 1 won 27.10% of the games
+Player(firstCard) 2 won 26.50% of the games
+The Simulation errored 46.40% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:14:20 AM
+Simulation started at 7/30/2023 11:14:20 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:14:23 AM
+Simulation started at 7/30/2023 11:14:23 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:14:25 AM
+Simulation started at 7/30/2023 11:14:25 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:14:27 AM
+Simulation started at 7/30/2023 11:14:27 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:17:24 AM
+Simulation started at 7/30/2023 11:17:24 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 11:17:44 AM
+Simulation started at 7/30/2023 11:17:44 AM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:32:11 PM
+Simulation started at 7/30/2023 1:32:11 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:32:29 PM
+Simulation started at 7/30/2023 1:32:29 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:32:31 PM
+Simulation started at 7/30/2023 1:32:31 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:32:34 PM
+Simulation started at 7/30/2023 1:32:34 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":1,"1":0,"error":0}
+Player(firstCard) 1 won 100.00% of the games
+Player(firstCard) 2 won 0.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:33:08 PM
+Simulation started at 7/30/2023 1:33:08 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:33:15 PM
+Simulation started at 7/30/2023 1:33:15 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:42:59 PM
+Simulation started at 7/30/2023 1:42:59 PM
+Time it took: 0h 0m 0s
+Iterations: 1
+Wins: {"0":0,"1":1,"error":0}
+Player(firstCard) 1 won 0.00% of the games
+Player(firstCard) 2 won 100.00% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:45:46 PM
+Simulation started at 7/30/2023 1:45:46 PM
+Time it took: 0h 0m 0s
+Iterations: 10000
+Wins: {"0":5089,"1":4911,"error":0}
+Player(firstCard) 1 won 50.89% of the games
+Player(firstCard) 2 won 49.11% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:46:29 PM
+Simulation started at 7/30/2023 1:46:29 PM
+Time it took: 0h 0m 0s
+Iterations: 10000
+Wins: {"0":5121,"1":4879,"error":0}
+Player(firstCard) 1 won 51.21% of the games
+Player(firstCard) 2 won 48.79% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 1:47:41 PM
+Simulation started at 7/30/2023 1:46:40 PM
+Time it took: 0h 1m 0s
+Iterations: 1000000
+Wins: {"0":505885,"1":494110,"error":5}
+Player(firstCard) 1 won 50.59% of the games
+Player(firstCard) 2 won 49.41% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 7/30/2023 3:06:30 PM
+Simulation started at 7/30/2023 3:05:31 PM
+Time it took: 0h 0m 59s
+Iterations: 1000000
+Wins: {"0":507022,"1":492973,"error":5}
+Player(firstCard) 1 won 50.70% of the games
+Player(firstCard) 2 won 49.30% of the games
+The Simulation errored 0.00% of the times
+

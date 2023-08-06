@@ -12,11 +12,12 @@ function simulation(){
 
     const startTime =  Date.now();
     //run the simulation a 20 Million times
-    const interations = 1;
-    const printInfoEvery = Math.floor(interations / 100000);
+    const interations = 1000000;
+    const printInfoEvery = 2;
     let currentIteration = 0;
     const playersAmount = 2;
     const tactics = new Array(playersAmount).fill(firstCard);
+    const detailsAboutGame:boolean = true;  
 
 
     let wins:any = new Object();
@@ -29,19 +30,22 @@ function simulation(){
     fs.appendFileSync('log.txt', `Simulation started at ${new Date(startTime).toLocaleDateString() + " " + new Date(startTime).toLocaleTimeString() }\n`);
 
     for(let i = 0; i < interations; i++){
+
         try{
-        const game = new Game(playersAmount, tactics,true);
+        const game = new Game(playersAmount, tactics, detailsAboutGame);
         wins[game.winner!] += 1;
         currentIteration = i;
         if(currentIteration % printInfoEvery == 0){
           GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins,tactics);
         }
         }
-        catch(e){
+        catch(e:any){
             //write the error to error.txt
             fs.appendFileSync('error.txt', e + "\n");
             wins["error"] += 1;
-            throw e;
+            if(detailsAboutGame){
+                throw e;
+            }
         }
     }
     //log results to log.txt with the amout of player, their wins and the tactics they used to win, and the time it took and the time it started, and the amount of iterations. In an easy to read format and logical order
