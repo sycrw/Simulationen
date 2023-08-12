@@ -66,7 +66,13 @@ export class Game{
             const playerCardIndex = currentPlayer.calculateMove(currentPlayer.Cards, this.LayedCards,this.ActionCardRequirmentsHandler.requirements); // get the index of the card the player wants to play
             
             const playerCard = currentPlayer.Cards[playerCardIndex!];// get the card the player wants to play
-            
+            if(this.log){
+                console.log(`Player ${currentPlayerIndex} plays: ${JSON.stringify(playerCard)} from his cards:`);
+                currentPlayer.Cards.forEach(card => {
+                    console.log(JSON.stringify(card));
+                }
+                );
+            }
             if(this.log){   
                 console.log("Requirements: " + this.ActionCardRequirmentsHandler.requirements);
             }

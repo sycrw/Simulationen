@@ -1,26 +1,27 @@
-import { alwaysDraw, firstCard, keepManyColors } from './Classes/Tactics';
+import { alwaysDraw, cardCounting, firstCard, keepManyColors, keepManyActionCards,playAllActionCards } from './Classes/Tactics';
 
 import { Game } from './Classes/Game';
 import { Tactic } from './types';
 import fs from 'fs';
 
 function simulation(){
-    //create a error.txt file
-    fs.writeFileSync('error.txt', "");
-    //create a log.txt file
-    fs.writeFileSync('log.txt', "");
-
+    //create a error.txt file and make a new line
+    fs.writeFileSync('error.txt', "\n");
     const startTime =  Date.now();
     //run the simulation a 20 Million times
-    const interations = 1000000;
-    const printInfoEvery = 2;
+    const interations = 1_000_000;
+    const printInfoEvery = 10_000;
     let currentIteration = 0;
     const playersAmount = 2;
-    const tactics = new Array(playersAmount).fill(firstCard);
-    const detailsAboutGame:boolean = true;  
+    const tactics = new Array(playersAmount).fill(keepManyColors);
+    tactics[0] = keepManyActionCards;
+    tactics[1] = playAllActionCards;
+    //tactics[0] = keepManyActionCards;
+    const detailsAboutGame:boolean = false;
+    let totalMovesOfAllGames = 0;
+    let AverageMovesOfAllGames = 0;
 
-
-    let wins:any = new Object();
+    let wins:any = {};
     console.log(`\nStarting simulation with ${interations} iterations and ${playersAmount} players at ${new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() }`);
     for(let i = 0; i < playersAmount; i++){
         wins[i] = 0;
@@ -34,9 +35,11 @@ function simulation(){
         try{
         const game = new Game(playersAmount, tactics, detailsAboutGame);
         wins[game.winner!] += 1;
+        totalMovesOfAllGames += game.round;
+        AverageMovesOfAllGames = totalMovesOfAllGames / (i + 1);
         currentIteration = i;
         if(currentIteration % printInfoEvery == 0){
-          GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins,tactics);
+          GiveCurrentInfoAboutSimulation(interations,startTime,currentIteration,playersAmount,wins,tactics,AverageMovesOfAllGames);
         }
         }
         catch(e:any){
@@ -73,7 +76,7 @@ function simulation(){
 }
 simulation();
 
-function GiveCurrentInfoAboutSimulation(interations:number,startTime:number,currentIteration:number,playersAmount:number,wins:any,tactics:any){
+function GiveCurrentInfoAboutSimulation(interations:number,startTime:number,currentIteration:number,playersAmount:number,wins:any,tactics:any,AverageMovesOfAllGames:number){
     //print out a progress bar that doesnt use a new line and the estimated time left
     const timeElapsed = Date.now() - startTime;
     const timePerIteration = timeElapsed / (currentIteration + 1);
@@ -99,13 +102,15 @@ function GiveCurrentInfoAboutSimulation(interations:number,startTime:number,curr
 
     //clear the last lines in the console
     if(currentIteration != 0){
-    for(let i = 0; i < playersAmount + 1; i++){
+    for(let i = 0; i < playersAmount + 3; i++){
         process.stdout.clearLine(0);
         process.stdout.cursorTo(0);
         process.stdout.moveCursor(0,-1);
     }
     }
     console.log(`\r${progressBarString} ${percentage.toFixed(2)}% -- Time left: ${timeLeftInHours.toFixed(0)}h ${timeLeftInMinutes.toFixed(0)}m ${timeLeftInSeconds.toFixed(0)}s`);
+    console.log(`Current iteration: ${currentIteration + 1}`);
+    console.log(`Average moves of all games: ${AverageMovesOfAllGames.toFixed(2)}`);
     for(let i = 0; i < playersAmount; i++){
         console.log(`Player ${i + 1} (${tactics[i].name}) won ${((wins[i] / currentIteration) * 100).toFixed(2)}% of the games`);
     }
