@@ -1,4 +1,4 @@
-import { alwaysDraw, cardCounting, firstCard, keepManyColors, keepManyActionCards,playAllActionCards } from './Classes/Tactics';
+import { alwaysDraw, cardCounting, firstCard, keepManyColors, keepManyActionCards,playAllActionCards, keepPlusCardsAndPlayAction } from './Classes/Tactics';
 
 import { Game } from './Classes/Game';
 import { Tactic } from './types';
@@ -14,8 +14,9 @@ function simulation(){
     let currentIteration = 0;
     const playersAmount = 2;
     const tactics = new Array(playersAmount).fill(keepManyColors);
-    tactics[0] = keepManyActionCards;
-    tactics[1] = playAllActionCards;
+    tactics[1] = keepPlusCardsAndPlayAction;
+    tactics[0] = playAllActionCards;
+
     //tactics[0] = keepManyActionCards;
     const detailsAboutGame:boolean = false;
     let totalMovesOfAllGames = 0;

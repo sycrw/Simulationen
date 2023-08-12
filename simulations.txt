@@ -716,3 +716,12 @@ Player(keepManyActionCards) 1 won 36.30% of the games
 Player(playAllActionCards) 2 won 63.70% of the games
 The Simulation errored 0.00% of the times
 
+Simulation with 2 players finished at 8/12/2023 6:07:49 PM
+Simulation started at 8/12/2023 6:07:20 PM
+Time it took: 0h 0m 28s
+Iterations: 1000000
+Wins: {"0":490812,"1":509188,"error":0}
+Player(playAllActionCards) 1 won 49.08% of the games
+Player(keepPlusCardsAndPlayAction) 2 won 50.92% of the games
+The Simulation errored 0.00% of the times
+

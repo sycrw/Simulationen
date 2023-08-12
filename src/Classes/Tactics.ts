@@ -301,14 +301,62 @@ export const playAllActionCards = (playerCards:Card[],LayedCards:Card[],requirem
         cardIndex = possibleCards[0];
     }
     else{
-        //pick the first card that matches the color or value
+        //pick the first card that can be played,
         for(let i = 0; i < playerCards.length; i++){
-            if(playerCards[i].color == LayedCards[LayedCards.length-1].color || playerCards[i].value == LayedCards[LayedCards.length-1].value){
+            if(playerCards[i].color == LayedCards[LayedCards.length-1].color || playerCards[i].value == LayedCards[LayedCards.length-1].value || playerCards[i].color == Color.Any){
                 cardIndex = i;
                 break;
             }
         }
     }
+    if(cardIndex == null){
+        return null;
+    }
+    //handle action cards
+    if(playerCards[cardIndex!].action){
+        let colorIndex = Math.floor(Math.random()*4);
+        playerCards[cardIndex!].color = numToColor(colorIndex);
+    }
+    return cardIndex;
+}
+
+//keep plus two and plus four cards to defend, else always try to get rid of action cards(reverse, skip, and wild)
+
+export const keepPlusCardsAndPlayAction = (playerCards:Card[],LayedCards:Card[],requirements:string[]):number|null => {
+    let cardIndex = null;
+    if(checkForForcingCards(playerCards,LayedCards,requirements)){ return checkForForcingCards(playerCards,LayedCards,requirements); }
+    //make a new array with indexes of possible cards
+    const possibleCards:number[] = playerCards.map((card,index) => {
+        if(card.action == Action.Reverse || card.action == Action.Skip || card.action == Action.Wild){
+            return index;
+        }
+    }).filter((card) => card != undefined) as number[];
+    //if there are possible cards play the first one
+    if(possibleCards.length > 0){
+        cardIndex = possibleCards[0];
+    }
+    else{
+        //play any card except plus two and plus four that matches the color or value
+        const possibleCards:number[] = playerCards.map((card,index) => {
+            if(card.action != Action.DrawTwo && card.action != Action.DrawFour && (card.color == LayedCards[LayedCards.length-1].color || card.value == LayedCards[LayedCards.length-1].value)){
+                return index;
+            }
+        }).filter((card) => card != undefined) as number[];
+        //if there are possible cards play the first one
+        if(possibleCards.length > 0){
+            cardIndex = possibleCards[0];
+        }
+        else{
+            //play any card
+            for (let i =0;i<playerCards.length;i++){
+                if(playerCards[i].color == LayedCards[LayedCards.length-1].color || playerCards[i].value == LayedCards[LayedCards.length-1].value || playerCards[i].color == Color.Any){
+                    cardIndex = i;
+                    break;
+                }
+            }
+        }
+    }
+
     if(cardIndex == null){
         return null;
     }
