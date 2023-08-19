@@ -23,9 +23,9 @@ function simulation() {
   const printInfoEvery = 12347;
   let currentIteration = 0;
   const playersAmount = 2;
-  const tactics = new Array(playersAmount).fill(cardCounting);
-  tactics[0] = keepPlusCardsAndPlayAction;
-  tactics[1] = playAllActionCards;
+  const tactics = new Array(playersAmount).fill(firstCard);
+  tactics[0] = cardCounting;
+  tactics[1] = keepPlusCardsAndPlayAction;
 
   //tactics[0] = keepManyActionCards;
   const detailsAboutGame: boolean = false;
