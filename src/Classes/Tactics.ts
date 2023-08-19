@@ -1,8 +1,6 @@
 import { Action, Color, numToColor } from "../types";
 
 import { Card } from "./Card";
-import { Game } from "./Game";
-import { Player } from "./Player";
 
 //if there is a draw four or draw two in the requirements, play a draw four or draw two if there is one
 const checkForForcingCards = (
@@ -32,35 +30,18 @@ const checkForForcingCards = (
   }
   return cardIndex;
 };
-//handle action cards
-const handleActionCards = (
-  playerCards: Card[],
-  cardIndex: number,
-  requirements: string[]
-): void => {
-  if (playerCards[cardIndex].action) {
-    if (playerCards[cardIndex].action == Action.DrawFour) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex].color = numToColor(colorIndex);
-    } else if (playerCards[cardIndex].action == Action.Wild) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex].color = numToColor(colorIndex);
-    }
-  }
-  if (playerCards[cardIndex].color == Color.Any) {
-    throw new Error("Color is still any");
-  }
-};
-
 export const firstCard = (
   playerCards: Card[],
   LayedCards: Card[],
   requirements: string[]
 ): number | null => {
   let cardIndex: number | null = null;
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
-    return checkForForcingCards(playerCards, LayedCards, requirements);
-  } //TODO: handle colors
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
+  }
   // first card that matches the color
   for (let i = 0; i < playerCards.length; i++) {
     if (
@@ -80,7 +61,6 @@ export const firstCard = (
           continue;
         }
       }
-
       cardIndex = i;
     }
   }
@@ -88,15 +68,7 @@ export const firstCard = (
     return null;
   }
   //handle action cards
-  if (playerCards[cardIndex!].action) {
-    if (playerCards[cardIndex!].action == Action.DrawFour) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex!].color = numToColor(colorIndex);
-    } else if (playerCards[cardIndex!].action == Action.Wild) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex!].color = numToColor(colorIndex);
-    }
-  }
+  transformAnyColorCards(playerCards, cardIndex!);
   if (playerCards[cardIndex!].color == Color.Any) {
     throw new Error("Color is still any");
   }
@@ -110,15 +82,23 @@ export const keepManyColors = (
   requirements: string[]
 ): number | null => {
   let cardIndex: number | null = null;
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
-    return checkForForcingCards(playerCards, LayedCards, requirements);
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    const cardIndex = checkForForcingCards(
+      playerCards,
+      LayedCards,
+      requirements
+    );
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
   }
   //get amount of each color and save in an object
+  // prettier-ignore
   let colorAmounts: { [key: string]: number } = {
-    red: 0,
-    blue: 0,
-    green: 0,
-    yellow: 0
+    "Red": 0,
+    "Blue": 0,
+    "Green": 0,
+    "Yellow": 0
   };
   //get the color with the most cards
   for (let i = 0; i < playerCards.length; i++) {
@@ -133,18 +113,24 @@ export const keepManyColors = (
   //get the first card that matches the color and it matches to the layed card else go to the next color
   for (let i = 0; i < sortedColors.length; i++) {
     for (let j = 0; j < playerCards.length; j++) {
-      if (
-        playerCards[j].color == sortedColors[i] &&
-        (playerCards[j].color == LayedCards[LayedCards.length - 1].color ||
-          playerCards[j].value == LayedCards[LayedCards.length - 1].value)
-      ) {
-        return j;
+      if (playerCards[j].color == sortedColors[i]) {
+        if (
+          playerCards[j].value == LayedCards[LayedCards.length - 1].value ||
+          playerCards[j].color == LayedCards[LayedCards.length - 1].color
+        ) {
+          cardIndex = j;
+          transformAnyColorCards(playerCards, cardIndex!);
+          return cardIndex;
+        }
       }
     }
   }
   //if no card matches the color, play a wild card
   for (let i = 0; i < playerCards.length; i++) {
-    if (playerCards[i].action == Action.Wild) {
+    if (
+      playerCards[i].action == Action.Wild ||
+      playerCards[i].action == Action.DrawFour
+    ) {
       cardIndex = i;
       //choose color with most cards
       let color = sortedColors[0];
@@ -152,36 +138,14 @@ export const keepManyColors = (
       return cardIndex;
     }
   }
-  //if no wild card, play a draw four
-  for (let i = 0; i < playerCards.length; i++) {
-    if (playerCards[i].action == Action.DrawFour) {
-      cardIndex = i;
-      //choose color with most cards
-      let color = sortedColors[0];
-      playerCards[cardIndex!].color = color as Color;
-      return cardIndex;
-    }
-  }
+
   if (cardIndex == null) {
     return null;
-  }
-  //handle action cards
-  if (playerCards[cardIndex!].action) {
-    if (playerCards[cardIndex!].action == Action.DrawFour) {
-      //choose color with most cards
-      let color = sortedColors[0];
-      playerCards[cardIndex!].color = color as Color;
-    } else if (playerCards[cardIndex!].action == Action.Wild) {
-      //choose color with most cards
-      let color = sortedColors[0];
-      playerCards[cardIndex!].color = color as Color;
-    }
   }
   //if color is still any, throw error
   if (playerCards[cardIndex!].color == Color.Any) {
     throw new Error("Color is still any");
   }
-
   return cardIndex;
 };
 
@@ -208,11 +172,12 @@ export const cardCounting = (
 ): number | null => {
   let cardIndex: number | null = null;
   //calculate the amount of cards of each color that have been layed
+  // prettier-ignore
   let colorAmounts: { [key: string]: number } = {
-    red: 0,
-    blue: 0,
-    green: 0,
-    yellow: 0
+    "Red": 0,
+    "Blue": 0,
+    "Green": 0,
+    "Yellow": 0
   };
   for (let i = 0; i < LayedCards.length; i++) {
     if (LayedCards[i].color != Color.Any) {
@@ -223,7 +188,7 @@ export const cardCounting = (
   const sortedColors = Object.keys(colorAmounts).sort(
     (a, b) => colorAmounts[b] - colorAmounts[a]
   );
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
     cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
     //handle color if it is any
     if (playerCards[cardIndex!].color == Color.Any) {
@@ -254,19 +219,16 @@ export const cardCounting = (
           }
         }
       }
-      //if it still is the first color being checked, play a wild card or draw four
-      if (i == 0) {
-        for (let j = 0; j < playerCards.length; j++) {
-          if (
-            playerCards[j].action == Action.Wild ||
-            playerCards[j].action == Action.DrawFour
-          ) {
-            cardIndex = j;
-            //choose color with most cards
-            let color = sortedColors[0];
-            playerCards[cardIndex!].color = color as Color;
-            break;
-          }
+      for (let j = 0; j < playerCards.length; j++) {
+        if (
+          playerCards[j].action == Action.Wild ||
+          playerCards[j].action == Action.DrawFour
+        ) {
+          cardIndex = j;
+          //choose color with most cards
+          let color = sortedColors[0];
+          playerCards[cardIndex!].color = color as Color;
+          break;
         }
       }
       //if no card is found go to the next color
@@ -282,13 +244,13 @@ export const cardCounting = (
           break;
         }
       }
-    } else if (cardIndex == null) {
-      return null;
     }
   }
-  //if color is still any, throw error
-  if (cardIndex != null && playerCards[cardIndex!].color == Color.Any) {
-    throw new Error("Color is still any");
+  if (cardIndex == null) {
+    return null;
+  }
+  if (playerCards[cardIndex!].color == Color.Any) {
+    playerCards[cardIndex!].color = sortedColors[0] as Color;
   }
   return cardIndex;
 };
@@ -299,8 +261,12 @@ export const keepManyActionCards = (
   requirements: string[]
 ): number | null => {
   let cardIndex = null;
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
-    return checkForForcingCards(playerCards, LayedCards, requirements);
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
+    //handle color if it is any
+    console.log(cardIndex + "checkForForcingCards");
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
   }
   //make a new array with indexes of possible cards
   let possibleCards: number[] = playerCards
@@ -319,7 +285,8 @@ export const keepManyActionCards = (
     for (let i = 0; i < playerCards.length; i++) {
       if (
         playerCards[i].color == LayedCards[LayedCards.length - 1].color ||
-        playerCards[i].value == LayedCards[LayedCards.length - 1].value
+        playerCards[i].value == LayedCards[LayedCards.length - 1].value ||
+        playerCards[i].color == Color.Any
       ) {
         cardIndex = i;
         break;
@@ -345,15 +312,7 @@ export const keepManyActionCards = (
   }
 
   //handle action cards
-  if (playerCards[cardIndex!].action) {
-    if (playerCards[cardIndex!].action == Action.DrawFour) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex!].color = numToColor(colorIndex);
-    } else if (playerCards[cardIndex!].action == Action.Wild) {
-      let colorIndex = Math.floor(Math.random() * 4);
-      playerCards[cardIndex!].color = numToColor(colorIndex);
-    }
-  }
+  transformAnyColorCards(playerCards, cardIndex!);
 
   return cardIndex;
 };
@@ -364,7 +323,7 @@ export const playAllActionCards = (
   requirements: string[]
 ): number | null => {
   let cardIndex = null;
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
     return checkForForcingCards(playerCards, LayedCards, requirements);
   }
   //make a new array with indexes of possible cards
@@ -395,10 +354,7 @@ export const playAllActionCards = (
     return null;
   }
   //handle action cards
-  if (playerCards[cardIndex!].action) {
-    let colorIndex = Math.floor(Math.random() * 4);
-    playerCards[cardIndex!].color = numToColor(colorIndex);
-  }
+  transformAnyColorCards(playerCards, cardIndex!);
   return cardIndex;
 };
 
@@ -410,8 +366,15 @@ export const keepPlusCardsAndPlayAction = (
   requirements: string[]
 ): number | null => {
   let cardIndex = null;
-  if (checkForForcingCards(playerCards, LayedCards, requirements)) {
-    return checkForForcingCards(playerCards, LayedCards, requirements);
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    const cardIndex = checkForForcingCards(
+      playerCards,
+      LayedCards,
+      requirements
+    );
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
   }
   //make a new array with indexes of possible cards
   const possibleCards: number[] = playerCards
@@ -459,14 +422,41 @@ export const keepPlusCardsAndPlayAction = (
       }
     }
   }
-
   if (cardIndex == null) {
     return null;
   }
   //handle action cards
-  if (playerCards[cardIndex!].action) {
-    let colorIndex = Math.floor(Math.random() * 4);
-    playerCards[cardIndex!].color = numToColor(colorIndex);
-  }
+  transformAnyColorCards(playerCards, cardIndex!);
   return cardIndex;
+};
+
+// calculate the amount of cards of own color and if the card is color.any make the color with the most cards the color of the card
+
+const transformAnyColorCards = (
+  playerCards: Card[],
+  cardToTransformIndex: number
+) => {
+  console.log("transformAnyColorCards");
+  console.log(playerCards[cardToTransformIndex], cardToTransformIndex);
+  //ignore prettier for this object
+  // prettier-ignore
+  const colors = {
+    "Red": 0,
+    "Blue": 0,
+    "Green": 0,
+    "Yellow": 0
+  };
+  for (let i = 0; i < playerCards.length; i++) {
+    if (playerCards[i].color != Color.Any) {
+      // @ts-ignore
+      colors[playerCards[i].color!] += 1;
+    }
+  }
+  if (playerCards[cardToTransformIndex].color == Color.Any) {
+    // @ts-ignore
+    playerCards[cardToTransformIndex].color = Object.keys(colors).sort(
+      // @ts-ignore
+      (a, b) => colors[b] - colors[a]
+    )[0];
+  }
 };

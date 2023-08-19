@@ -797,3 +797,57 @@ Player(keepPlusCardsAndPlayAction) 1 won 52.10% of the games
 Player(playAllActionCards) 2 won 47.90% of the games
 The Simulation errored 0.00% of the times
 
+Simulation with 2 players finished at 8/19/2023 2:19:41 PM
+Simulation started at 8/19/2023 2:19:32 PM
+Time it took: 0h 0m 8s
+Iterations: 500
+Wins: {"0":8,"1":492,"error":0}
+Player(cardCounting) 1 won 1.60% of the games
+Player(keepPlusCardsAndPlayAction) 2 won 98.40% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 8/19/2023 2:24:06 PM
+Simulation started at 8/19/2023 2:23:58 PM
+Time it took: 0h 0m 8s
+Iterations: 500
+Wins: {"0":8,"1":492,"error":0}
+Player(cardCounting) 1 won 1.60% of the games
+Player(keepPlusCardsAndPlayAction) 2 won 98.40% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 8/19/2023 3:17:20 PM
+Simulation started at 8/19/2023 3:17:15 PM
+Time it took: 0h 0m 4s
+Iterations: 500
+Wins: {"0":199,"1":301,"error":0}
+Player(cardCounting) 1 won 39.80% of the games
+Player(keepPlusCardsAndPlayAction) 2 won 60.20% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 8/19/2023 3:17:48 PM
+Simulation started at 8/19/2023 3:17:42 PM
+Time it took: 0h 0m 5s
+Iterations: 500
+Wins: {"0":258,"1":242,"error":0}
+Player(cardCounting) 1 won 51.60% of the games
+Player(firstCard) 2 won 48.40% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 8/19/2023 3:20:24 PM
+Simulation started at 8/19/2023 3:20:19 PM
+Time it took: 0h 0m 5s
+Iterations: 500
+Wins: {"0":267,"1":233,"error":0}
+Player(cardCounting) 1 won 53.40% of the games
+Player(firstCard) 2 won 46.60% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 2 players finished at 8/19/2023 4:24:44 PM
+Simulation started at 8/19/2023 4:24:38 PM
+Time it took: 0h 0m 5s
+Iterations: 500
+Wins: {"0":256,"1":244,"error":0}
+Player(cardCounting) 1 won 51.20% of the games
+Player(firstCard) 2 won 48.80% of the games
+The Simulation errored 0.00% of the times
+

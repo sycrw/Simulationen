@@ -7,9 +7,6 @@ import {
   playAllActionCards,
   keepPlusCardsAndPlayAction
 } from "./Classes/Tactics";
-
-import robot from "robotjs";
-
 import { Game } from "./Classes/Game";
 import { Tactic } from "./types";
 import fs from "fs";
@@ -19,16 +16,15 @@ function simulation() {
   fs.writeFileSync("error.txt", "\n");
   const startTime = Date.now();
   //run the simulation a 20 Million times
-  const interations = 1200000;
-  const printInfoEvery = 12347;
+  const interations = 500;
+  const printInfoEvery = 1;
   let currentIteration = 0;
   const playersAmount = 2;
   const tactics = new Array(playersAmount).fill(firstCard);
   tactics[0] = cardCounting;
-  tactics[1] = keepPlusCardsAndPlayAction;
+  tactics[1] = firstCard;
 
-  //tactics[0] = keepManyActionCards;
-  const detailsAboutGame: boolean = false;
+  const detailsAboutGame: boolean = true;
   const moveMouse: boolean = false;
   let totalMovesOfAllGames = 0;
   let AverageMovesOfAllGames = 0;
@@ -53,19 +49,8 @@ function simulation() {
 
   for (let i = 0; i < interations; i++) {
     try {
-      //tactics will be rotated, by the iteration number%playersAmount
       let inputTactics = arrayRotate(tactics, i % playersAmount);
-      //console.log(inputTactics, i % playersAmount, "inputTactics");
-
       const game = new Game(playersAmount, inputTactics, detailsAboutGame);
-      /*console.log(
-        game.winner,
-        "winner",
-        "tactic of the winner",
-        inputTactics[game.winner!],
-        "translated winner(moved by the amout the tactics where moved)",
-        (game.winner! + (i % playersAmount)) % playersAmount
-      );*/
       wins[(game.winner! + (i % playersAmount)) % playersAmount] += 1;
       totalMovesOfAllGames += game.round;
       AverageMovesOfAllGames = totalMovesOfAllGames / (i + 1);
@@ -80,12 +65,6 @@ function simulation() {
           tactics,
           AverageMovesOfAllGames
         );
-        if (moveMouse) {
-          robot.moveMouse(
-            robot.getMousePos().x + Math.floor(Math.random() * 100),
-            robot.getMousePos().y + Math.floor(Math.random() * 100)
-          );
-        }
       }
       //move tactics to the right
     } catch (e) {

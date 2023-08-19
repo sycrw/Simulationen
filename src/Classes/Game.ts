@@ -83,11 +83,17 @@ export class Game {
       const currentPlayer = this.Players[
         currentPlayerIndex % this.Players.length
       ];
+      if (this.log) {
+        console.log("--CalcLogs--");
+      }
       const playerCardIndex = currentPlayer.calculateMove(
         currentPlayer.Cards,
         this.LayedCards,
         this.ActionCardRequirmentsHandler.requirements
       ); // get the index of the card the player wants to play
+      if (this.log) {
+        console.log("--CalcLogsEnd--");
+      }
 
       const playerCard = currentPlayer.Cards[playerCardIndex!]; // get the card the player wants to play
       if (this.log) {
@@ -516,6 +522,30 @@ export class Game {
           throw new Error(`Reverse requirement not met!`);
         }
       }
+    }
+    //check if color of the top card is never any
+    if (this.LayedCards[this.LayedCards.length - 1].color == Color.Any) {
+      throw new Error(
+        `Top card color is any!: Card: ${JSON.stringify(
+          this.LayedCards[this.LayedCards.length - 1]
+        )}‚`
+      );
+    }
+    //check if value is undefined
+    if (this.LayedCards[this.LayedCards.length - 1].value === undefined) {
+      throw new Error(
+        `Top card value is undefined!: Card: ${JSON.stringify(
+          this.LayedCards[this.LayedCards.length - 1]
+        )}‚`
+      );
+    }
+    //check if action is undefined
+    if (this.LayedCards[this.LayedCards.length - 1].action === undefined) {
+      throw new Error(
+        `Top card action is undefined!: Card: ${JSON.stringify(
+          this.LayedCards[this.LayedCards.length - 1]
+        )}‚`
+      );
     }
   };
 }
