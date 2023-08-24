@@ -851,3 +851,120 @@ Player(cardCounting) 1 won 51.20% of the games
 Player(firstCard) 2 won 48.80% of the games
 The Simulation errored 0.00% of the times
 
+Simulation with 6 players finished at 8/19/2023 4:45:19 PM
+Simulation started at 8/19/2023 4:45:17 PM
+Time it took: 0h 0m 1s
+Iterations: 500
+Wins: {"0":104,"1":63,"2":93,"3":67,"4":106,"5":62,"error":5}
+Player(cardCounting) 1 won 20.80% of the games
+Player(firstCard) 2 won 12.60% of the games
+Player(keepManyColors) 3 won 18.60% of the games
+Player(keepManyActionCards) 4 won 13.40% of the games
+Player(playAllActionCards) 5 won 21.20% of the games
+Player(keepPlusCardsAndPlayAction) 6 won 12.40% of the games
+The Simulation errored 1.00% of the times
+
+Simulation with 6 players finished at 8/19/2023 4:45:48 PM
+Simulation started at 8/19/2023 4:45:47 PM
+Time it took: 0h 0m 0s
+Iterations: 500
+Wins: {"0":109,"1":65,"2":99,"3":62,"4":103,"5":58,"error":4}
+Player(cardCounting) 1 won 21.80% of the games
+Player(firstCard) 2 won 13.00% of the games
+Player(keepManyColors) 3 won 19.80% of the games
+Player(keepManyActionCards) 4 won 12.40% of the games
+Player(playAllActionCards) 5 won 20.60% of the games
+Player(keepPlusCardsAndPlayAction) 6 won 11.60% of the games
+The Simulation errored 0.80% of the times
+
+Simulation with 6 players finished at 8/19/2023 4:46:20 PM
+Simulation started at 8/19/2023 4:46:13 PM
+Time it took: 0h 0m 6s
+Iterations: 50000
+Wins: {"0":10551,"1":6456,"2":10069,"3":6121,"4":10312,"5":6138,"error":353}
+Player(cardCounting) 1 won 21.10% of the games
+Player(firstCard) 2 won 12.91% of the games
+Player(keepManyColors) 3 won 20.14% of the games
+Player(keepManyActionCards) 4 won 12.24% of the games
+Player(playAllActionCards) 5 won 20.62% of the games
+Player(keepPlusCardsAndPlayAction) 6 won 12.28% of the games
+The Simulation errored 0.71% of the times
+
+Simulation with 6 players finished at 8/19/2023 4:53:11 PM
+Simulation started at 8/19/2023 4:53:02 PM
+Time it took: 0h 0m 8s
+Iterations: 50000
+Wins: {"0":8281,"1":8254,"2":8431,"3":8257,"4":8419,"5":8358,"error":0}
+Player(cardCounting) 1 won 16.56% of the games
+Player(cardCounting) 2 won 16.51% of the games
+Player(cardCounting) 3 won 16.86% of the games
+Player(cardCounting) 4 won 16.51% of the games
+Player(cardCounting) 5 won 16.84% of the games
+Player(cardCounting) 6 won 16.72% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 6 players finished at 8/19/2023 4:57:04 PM
+Simulation started at 8/19/2023 4:53:59 PM
+Time it took: 0h 3m 4s
+Iterations: 1000000
+Wins: {"0":166415,"1":166442,"2":167570,"3":166575,"4":166140,"5":166858,"error":0}
+Player(cardCounting) 1 won 16.64% of the games
+Player(cardCounting) 2 won 16.64% of the games
+Player(cardCounting) 3 won 16.76% of the games
+Player(cardCounting) 4 won 16.66% of the games
+Player(cardCounting) 5 won 16.61% of the games
+Player(cardCounting) 6 won 16.69% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 6 players finished at 8/19/2023 5:04:17 PM
+Simulation started at 8/19/2023 5:04:03 PM
+Time it took: 0h 0m 14s
+Iterations: 100000
+Wins: {"0":16423,"1":16619,"2":16784,"3":16788,"4":16572,"5":16814,"error":0}
+Player(keepPlusCardsAndPlayAction) 1 won 16.42% of the games
+Player(keepPlusCardsAndPlayAction) 2 won 16.62% of the games
+Player(keepPlusCardsAndPlayAction) 3 won 16.78% of the games
+Player(keepPlusCardsAndPlayAction) 4 won 16.79% of the games
+Player(keepPlusCardsAndPlayAction) 5 won 16.57% of the games
+Player(keepPlusCardsAndPlayAction) 6 won 16.81% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 6 players finished at 8/19/2023 5:04:50 PM
+Simulation started at 8/19/2023 5:04:38 PM
+Time it took: 0h 0m 11s
+Iterations: 100000
+Wins: {"0":13896,"1":13706,"2":13872,"3":13853,"4":13739,"5":13624,"error":17310}
+Player(playAllActionCards) 1 won 13.90% of the games
+Player(playAllActionCards) 2 won 13.71% of the games
+Player(playAllActionCards) 3 won 13.87% of the games
+Player(playAllActionCards) 4 won 13.85% of the games
+Player(playAllActionCards) 5 won 13.74% of the games
+Player(playAllActionCards) 6 won 13.62% of the games
+The Simulation errored 17.31% of the times
+
+Simulation with 6 players finished at 8/19/2023 5:05:52 PM
+Simulation started at 8/19/2023 5:05:38 PM
+Time it took: 0h 0m 13s
+Iterations: 100000
+Wins: {"0":16848,"1":16398,"2":16796,"3":16834,"4":16553,"5":16571,"error":0}
+Player(playAllActionCards) 1 won 16.85% of the games
+Player(playAllActionCards) 2 won 16.40% of the games
+Player(playAllActionCards) 3 won 16.80% of the games
+Player(playAllActionCards) 4 won 16.83% of the games
+Player(playAllActionCards) 5 won 16.55% of the games
+Player(playAllActionCards) 6 won 16.57% of the games
+The Simulation errored 0.00% of the times
+
+Simulation with 6 players finished at 8/19/2023 5:12:05 PM
+Simulation started at 8/19/2023 5:11:58 PM
+Time it took: 0h 0m 6s
+Iterations: 50000
+Wins: {"0":10650,"1":6366,"2":9958,"3":6186,"4":10433,"5":6407,"error":0}
+Player(cardCounting) 1 won 21.30% of the games
+Player(firstCard) 2 won 12.73% of the games
+Player(keepManyColors) 3 won 19.92% of the games
+Player(keepManyActionCards) 4 won 12.37% of the games
+Player(playAllActionCards) 5 won 20.87% of the games
+Player(keepPlusCardsAndPlayAction) 6 won 12.81% of the games
+The Simulation errored 0.00% of the times
+

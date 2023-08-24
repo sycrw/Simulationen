@@ -189,9 +189,12 @@ export const cardCounting = (
     (a, b) => colorAmounts[b] - colorAmounts[a]
   );
   if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    //console.log("forcing card found");
     cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
+    //console.log("card got: " + JSON.stringify(playerCards[cardIndex!]));
     //handle color if it is any
     if (playerCards[cardIndex!].color == Color.Any) {
+      //console.log("color is any");
       playerCards[cardIndex!].color = sortedColors[0] as Color;
     }
   } else {
@@ -264,7 +267,6 @@ export const keepManyActionCards = (
   if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
     cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
     //handle color if it is any
-    console.log(cardIndex + "checkForForcingCards");
     transformAnyColorCards(playerCards, cardIndex!);
     return cardIndex;
   }
@@ -324,7 +326,10 @@ export const playAllActionCards = (
 ): number | null => {
   let cardIndex = null;
   if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
-    return checkForForcingCards(playerCards, LayedCards, requirements);
+    cardIndex = checkForForcingCards(playerCards, LayedCards, requirements);
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
   }
   //make a new array with indexes of possible cards
   let possibleCards: number[] = playerCards
@@ -436,8 +441,6 @@ const transformAnyColorCards = (
   playerCards: Card[],
   cardToTransformIndex: number
 ) => {
-  console.log("transformAnyColorCards");
-  console.log(playerCards[cardToTransformIndex], cardToTransformIndex);
   //ignore prettier for this object
   // prettier-ignore
   const colors = {
