@@ -23,7 +23,7 @@ function simulation(inputTactics: Tactic[]) {
   //create a error.txt file and make a new line
   const startTime = Date.now();
   //run the simulation a 20 Million times
-  const interations = 1000;
+  const interations = 1000000;
   const printInfoEvery = 1;
   let currentIteration = 0;
   const playersAmount = inputTactics.length;
@@ -51,9 +51,9 @@ function simulation(inputTactics: Tactic[]) {
   wins["error"] = 0;
   for (let i = 0; i < interations; i++) {
     try {
-      let inputTactics = arrayRotate(tactics, i % playersAmount);
+      let inputTactics = [...tactics];
       const game = new Game(playersAmount, inputTactics, detailsAboutGame);
-      wins[(game.winner! + (i % playersAmount)) % playersAmount] += 1;
+      wins[game.winner!] += 1;
       totalMovesOfAllGames += game.round;
       AverageMovesOfAllGames = totalMovesOfAllGames / (i + 1);
       currentIteration = i;
@@ -160,7 +160,7 @@ function GiveCurrentInfoAboutSimulation(
 
   //clear the last lines in the console
   if (currentIteration != 0) {
-    for (let i = 0; i < playersAmount + 3; i++) {
+    for (let i = 0; i < playersAmount + 4; i++) {
       process.stdout.clearLine(0);
       process.stdout.cursorTo(0);
       process.stdout.moveCursor(0, -1);

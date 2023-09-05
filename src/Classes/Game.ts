@@ -20,7 +20,7 @@ export class Game {
 
   constructor(
     playersAmount: number,
-    tactics: ((playerCards: Card[], LayedCards: Card[]) => number | null)[],
+    tactics: ((playerCards: Card[], LayedCards: Card[], requirement: string[]) => number | null)[],
     public log: boolean
   ) {
     this.Deck = this.initializeCards();
