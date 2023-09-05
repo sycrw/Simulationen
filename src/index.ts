@@ -2,90 +2,28 @@ import {
   alwaysDraw,
   cardCounting,
   firstCard,
-  keepManyColors,
   keepManyActionCards,
-  playAllActionCards,
-  keepPlusCardsAndPlayAction
+  keepManyColors,
+  keepPlusCardsAndPlayAction,
+  playAllActionCards
 } from "./Classes/Tactics";
+
 import { Game } from "./Classes/Game";
 import { Tactic } from "./types";
 import fs from "fs";
 
 //test all tactics against each other and save the results in a csv with the name of the tactic and the winrate
-testAllTactics();
-function testAllTactics() {
-  const tactics: Tactic[] = [
-    cardCounting,
-    firstCard,
-    keepManyColors,
-    keepManyActionCards,
-    playAllActionCards,
-    keepPlusCardsAndPlayAction
-  ];
 
-  //time logging and prodiction
-  const testStartTime = Date.now();
-
-  let heading = "Tactic;";
-  for (let i = 0; i < tactics.length; i++) {
-    heading += `${tactics[i].name};`;
-  }
-  heading += "\n";
-  fs.writeFileSync("results.csv", heading);
-  for (let i = 0; i < tactics.length; i++) {
-    //in next line of the csv write the name of the tactic
-    let line = `${tactics[i].name};`;
-    for (let j = 0; j < tactics.length; j++) {
-      const started = Date.now();
-      const inputTactics = [tactics[i], tactics[j]];
-      const results = simulation(inputTactics);
-      line += `${results[tactics[i].name].toFixed(2)};`;
-      //log make the log colorful
-      console.log(
-        `\n${tactics[i].name} vs ${
-          tactics[j].name
-        } finished at ${new Date().toLocaleTimeString()}`
-      );
-      console.log(
-        `Time it took: ${Math.floor(
-          (Date.now() - started) / 1000 / 60
-        )}m ${Math.floor(
-          (Date.now() - started) / 1000 -
-            Math.floor((Date.now() - started) / 1000 / 60) * 60
-        )}s`
-      );
-      //log the time estimated time left
-      const timeElapsed = Date.now() - testStartTime;
-      const timePerIteration = timeElapsed / (i * tactics.length + j + 1);
-      const timeLeft =
-        (tactics.length * tactics.length - (i * tactics.length + j)) *
-        timePerIteration;
-      const timeLeftInHours = Math.floor(timeLeft / 1000 / 60 / 60);
-      const timeLeftInMinutes = Math.floor(
-        timeLeft / 1000 / 60 - timeLeftInHours * 60
-      );
-      console.log(
-        `Time left: ${timeLeftInHours.toFixed(0)}h ${timeLeftInMinutes.toFixed(
-          0
-        )}m`
-      );
-    }
-    line += "\n";
-    fs.appendFileSync("results.csv", line);
-    //log colorful that the tactic is done
-    console.log(
-      "\x1b[31m",
-      `${tactics[i].name} is done at ${new Date().toLocaleTimeString()}`,
-      "\x1b[0m"
-    );
-  }
-}
+simulation([
+  firstCard,
+  firstCard,
+]);
 
 function simulation(inputTactics: Tactic[]) {
   //create a error.txt file and make a new line
   const startTime = Date.now();
   //run the simulation a 20 Million times
-  const interations = 100_000;
+  const interations = 1000;
   const printInfoEvery = 1;
   let currentIteration = 0;
   const playersAmount = inputTactics.length;
@@ -94,6 +32,10 @@ function simulation(inputTactics: Tactic[]) {
   const detailsAboutGame: boolean = false;
   let totalMovesOfAllGames = 0;
   let AverageMovesOfAllGames = 0;
+
+  let csvLine0 = ""
+  let csvLine1 = "Player1;";
+  let csvLine2 = "Player2;";
 
   let wins: any = {};
   if (!inputTactics) {
@@ -126,6 +68,10 @@ function simulation(inputTactics: Tactic[]) {
           AverageMovesOfAllGames
         );
       }
+      //write in the csv
+      csvLine0 += `${i};`
+      csvLine1 += `${wins[0]/(i+1)};`
+      csvLine2 += `${wins[1]/(i+1)};`
       //move tactics to the right
     } catch (e) {
       //write the error to error.txt
@@ -135,6 +81,8 @@ function simulation(inputTactics: Tactic[]) {
       }
     }
   }
+  //write the csv
+  fs.writeFileSync("Gewinn.csv", `${csvLine0}\n${csvLine1}\n${csvLine2}`);
   if (!inputTactics) {
     //print out the results and the time it took in h m s
     console.log(
