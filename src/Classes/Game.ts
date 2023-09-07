@@ -35,7 +35,7 @@ export class Game {
       this.Players.reduce((acc, player) => acc + player.Cards.length, 0);
     //start Cards list to compare if a card is lost
     this.startCardsList = this.Deck.concat();
-    this.Players.forEach(player => {
+    this.Players.forEach((player) => {
       this.startCardsList = this.startCardsList.concat(
         JSON.parse(JSON.stringify(player.Cards))
       );
@@ -102,7 +102,7 @@ export class Game {
             playerCard
           )} from his cards:`
         );
-        currentPlayer.Cards.forEach(card => {
+        currentPlayer.Cards.forEach((card) => {
           console.log(JSON.stringify(card));
         });
       }
@@ -174,13 +174,13 @@ export class Game {
               `Player ${currentPlayerIndex} couldnt respond to the requirment: ${requirement}`
             );
             console.log("His cards:");
-            currentPlayer.Cards.forEach(card => {
+            currentPlayer.Cards.forEach((card) => {
               console.log(JSON.stringify(card));
             });
           }
 
           const amount = this.ActionCardRequirmentsHandler.requirements.filter(
-            action => action == requirement
+            (action) => action == requirement
           ).length;
           const AmounttoDraw = (requirement == Action.DrawTwo ? 2 : 4) * amount;
           for (let i = 0; i < AmounttoDraw; i++) {
@@ -211,7 +211,7 @@ export class Game {
               `Player ${currentPlayerIndex} layed another draw ${requirement} card`
             );
             console.log("His cards:");
-            currentPlayer.Cards.forEach(card => {
+            currentPlayer.Cards.forEach((card) => {
               console.log(JSON.stringify(card));
             });
             console.log(
@@ -369,7 +369,7 @@ export class Game {
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
-        array[currentIndex]
+        array[currentIndex],
       ];
     }
     return array;

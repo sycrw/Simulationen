@@ -1,18 +1,22 @@
 import {
   alwaysDraw,
+  bestTactic,
+  bestTacticByExclucion,
   cardCounting,
   firstCard,
-  keepManyColors,
   keepManyActionCards,
+  keepManyColors,
+  keepPlusCardsAndPlayAction,
   playAllActionCards,
-  keepPlusCardsAndPlayAction
 } from "./Classes/Tactics";
+
 import { Game } from "./Classes/Game";
 import { Tactic } from "./types";
+import { before } from "node:test";
 import fs from "fs";
 
 //test all tactics against each other and save the results in a csv with the name of the tactic and the winrate
-testAllTactics();
+// testAllTactics();
 function testAllTactics() {
   const tactics: Tactic[] = [
     cardCounting,
@@ -20,7 +24,8 @@ function testAllTactics() {
     keepManyColors,
     keepManyActionCards,
     playAllActionCards,
-    keepPlusCardsAndPlayAction
+    keepPlusCardsAndPlayAction,
+    bestTacticByExclucion,
   ];
 
   //time logging and prodiction
@@ -81,11 +86,13 @@ function testAllTactics() {
   }
 }
 
+simulation([bestTacticByExclucion, keepPlusCardsAndPlayAction]);
+
 function simulation(inputTactics: Tactic[]) {
   //create a error.txt file and make a new line
   const startTime = Date.now();
   //run the simulation a 20 Million times
-  const interations = 100_000;
+  const interations = 100000;
   const printInfoEvery = 1;
   let currentIteration = 0;
   const playersAmount = inputTactics.length;
@@ -115,7 +122,7 @@ function simulation(inputTactics: Tactic[]) {
       totalMovesOfAllGames += game.round;
       AverageMovesOfAllGames = totalMovesOfAllGames / (i + 1);
       currentIteration = i;
-      if (currentIteration % printInfoEvery == 0) {
+      if (currentIteration % printInfoEvery == 0 && !detailsAboutGame) {
         GiveCurrentInfoAboutSimulation(
           interations,
           startTime,

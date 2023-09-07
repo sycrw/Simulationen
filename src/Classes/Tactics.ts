@@ -277,7 +277,7 @@ export const keepManyActionCards = (
         return index;
       }
     })
-    .filter(card => card != undefined) as number[];
+    .filter((card) => card != undefined) as number[];
   //if there are no possible cards, return null
   //console.log("Cards that can be played: ")
   //possibleCards.forEach((card) => console.log(playerCards[card]));
@@ -338,7 +338,7 @@ export const playAllActionCards = (
         return index;
       }
     })
-    .filter(card => card != undefined) as number[];
+    .filter((card) => card != undefined) as number[];
   //if there are possible cards play the first one
   if (possibleCards.length > 0) {
     cardIndex = possibleCards[0];
@@ -392,7 +392,7 @@ export const keepPlusCardsAndPlayAction = (
         return index;
       }
     })
-    .filter(card => card != undefined) as number[];
+    .filter((card) => card != undefined) as number[];
   //if there are possible cards play the first one
   if (possibleCards.length > 0) {
     cardIndex = possibleCards[0];
@@ -409,7 +409,7 @@ export const keepPlusCardsAndPlayAction = (
           return index;
         }
       })
-      .filter(card => card != undefined) as number[];
+      .filter((card) => card != undefined) as number[];
     //if there are possible cards play the first one
     if (possibleCards.length > 0) {
       cardIndex = possibleCards[0];
@@ -462,4 +462,307 @@ const transformAnyColorCards = (
       (a, b) => colors[b] - colors[a]
     )[0];
   }
+};
+
+//best Tactic
+/**
+ * Combines Keep Many Colors and KeepPlusCardsAndPlayAction + Keep Many Numbers
+ **/
+export const bestTactic = (
+  playerCards: Card[],
+  LayedCards: Card[],
+  requirements: string[]
+): number | null => {
+  // console.log("start calc best Tactic");
+  let cardIndex = null;
+  let anyCardColor: Color;
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    const cardIndex = checkForForcingCards(
+      playerCards,
+      LayedCards,
+      requirements
+    );
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
+  }
+  //make a new object from the cards that looks like this, called valued cards : [{value:number, card:Card}]
+  let valuedCards: { value: number; card: Card }[] = [];
+  for (let i = 0; i < playerCards.length; i++) {
+    valuedCards.push({ value: 0, card: playerCards[i] });
+  }
+  //const which tactic gives how many points
+  const tacticPoints = {
+    keepManyColors: 1,
+    keepManyNumbers: 0,
+    keepPlusCardsAndPlayAction: 0,
+    keepPlusCardsAndPlayActionMinus: 0,
+  };
+  //let each tactic play and if the tactic would play the card, they add a point
+  //tactic: keepManyColors
+  // prettier-ignore
+  const playerColorCount: any = {
+    "Red": 0,
+    "Blue": 0,
+    "Green": 0,
+    "Yellow": 0,
+  };
+  for (let i = 0; i < playerCards.length; i++) {
+    if (!playerCards[i].color) {
+      throw new Error("color is undefinded");
+    }
+    if (playerCards[i].color != Color.Any) {
+      playerColorCount[playerCards[i].color!] += 1;
+    }
+  }
+  // console.log("playerColorCount: " + JSON.stringify(playerColorCount, null, 2));
+  //sort the object by the amount of cards
+  const sortedColors = Object.keys(playerColorCount).sort(
+    (a, b) => playerColorCount[b] - playerColorCount[a]
+  );
+  // console.log("sortedColors: " + JSON.stringify(sortedColors, null, 2));
+
+  //now each card that matches the first card, gets their value upped by one
+  for (let i = 0; i < valuedCards.length; i++) {
+    if (valuedCards[i].card.color == sortedColors[0]) {
+      valuedCards[i].value += tacticPoints.keepManyColors;
+    }
+  }
+  anyCardColor = sortedColors[0] as Color;
+  // console.log("value after colors", JSON.stringify(valuedCards, null, 2));
+
+  //Tactic: Keep many numbers
+  //count which cards are the most common
+  const playerNumberCount: any = {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+  };
+
+  for (let i = 0; i < playerCards.length; i++) {
+    if (playerCards[i].value != -1) {
+      playerNumberCount[playerCards[i].value!] += 1;
+    }
+  }
+  // console.log(
+  //   "playerNumberCount: " + JSON.stringify(playerNumberCount, null, 2)
+  // );
+
+  //sort the object by the amount of cards
+  const sortedNumbers = Object.keys(playerNumberCount).sort(
+    (a, b) => playerNumberCount[b] - playerNumberCount[a]
+  );
+  // console.log("sortedNumbers: " + JSON.stringify(sortedNumbers, null, 2));
+
+  //now each card that matches the first card, gets their value upped by one
+  for (let i = 0; i < valuedCards.length; i++) {
+    if (valuedCards[i].card.value == Number(sortedNumbers[0])) {
+      valuedCards[i].value += tacticPoints.keepManyNumbers;
+    }
+    if (valuedCards[i].card.value == Number(sortedNumbers[1])) {
+      valuedCards[i].value += tacticPoints.keepManyNumbers / 2;
+    }
+  }
+  // console.log("value after numbers", JSON.stringify(valuedCards, null, 2));
+
+  //tactic keep plus cards and play action
+  //loop over the cards and if the card is an action card but not a plus card, up the value by one
+  //if it is a plus card down the value by one
+  for (let i = 0; i < valuedCards.length; i++) {
+    if (
+      valuedCards[i].card.action == Action.Reverse ||
+      valuedCards[i].card.action == Action.Skip ||
+      valuedCards[i].card.action == Action.Wild
+    ) {
+      valuedCards[i].value += tacticPoints.keepPlusCardsAndPlayAction;
+    }
+    if (
+      valuedCards[i].card.action == Action.DrawTwo ||
+      valuedCards[i].card.action == Action.DrawFour
+    ) {
+      valuedCards[i].value -= tacticPoints.keepPlusCardsAndPlayActionMinus;
+    }
+  }
+  // console.log("value after action cards", JSON.stringify(valuedCards, null, 2));
+
+  //sort valueCards, after value
+  valuedCards.sort((a, b) => b.value - a.value);
+  // console.log("evaluated cards", JSON.stringify(valuedCards, null, 2));
+
+  //play the first card, that is playable
+  for (let i = 0; i < valuedCards.length; i++) {
+    if (
+      valuedCards[i].card.color == LayedCards[LayedCards.length - 1].color ||
+      valuedCards[i].card.value == LayedCards[LayedCards.length - 1].value ||
+      valuedCards[i].card.color == Color.Any
+    ) {
+      cardIndex = playerCards.indexOf(valuedCards[i].card);
+      break;
+    }
+  }
+  if (cardIndex == null) {
+    return null;
+  }
+  //if color is any, make it the color with the most cards
+  if (playerCards[cardIndex!].color == Color.Any) {
+    playerCards[cardIndex!].color = anyCardColor;
+  }
+
+  return cardIndex;
+};
+
+//best Tactic by exclucion
+//tactics: keep many colors, keep many numbers, keep plus cards and play action,
+//let first tactic give cards it would lay,
+//then let second tactic, evaluate on the recommended cards of the first tactic
+//and so on
+export const bestTacticByExclucion = (
+  playerCards: Card[],
+  LayedCards: Card[],
+  requirements: string[]
+): number | null => {
+  // console.log("player Cards", JSON.stringify(playerCards, null, 2));
+  let cardIndex = null;
+  if (playerCards.length == 1) {
+    return 0;
+  }
+  if (checkForForcingCards(playerCards, LayedCards, requirements) != null) {
+    const cardIndex = checkForForcingCards(
+      playerCards,
+      LayedCards,
+      requirements
+    );
+    //handle color if it is any
+    transformAnyColorCards(playerCards, cardIndex!);
+    return cardIndex;
+  }
+  let recommendedCards: Card[] = [];
+  //put all cards,that can be layed, in recommended cards
+  for (let i = 0; i < playerCards.length; i++) {
+    if (
+      playerCards[i].color == LayedCards[LayedCards.length - 1].color ||
+      playerCards[i].value == LayedCards[LayedCards.length - 1].value ||
+      playerCards[i].color == Color.Any
+    ) {
+      recommendedCards.push(playerCards[i]);
+    }
+    //if a action card is laying, any player has the same action, add it to the recommended cards
+    if (
+      playerCards[i].action == Action.Reverse ||
+      playerCards[i].action == Action.Skip
+    ) {
+      if (LayedCards[LayedCards.length - 1].action == playerCards[i].action) {
+        recommendedCards.push(playerCards[i]);
+      }
+    }
+    //if color is any add
+  }
+  //if no cards can be layed, return null
+  if (recommendedCards.length == 0) {
+    return null;
+  }
+  // console.log("recomended cards", JSON.stringify(recommendedCards, null, 2));
+
+  //tactic: keep many colors
+  // prettier-ignore
+  const playerColorCount: any = {
+    "Red": 0,
+    "Blue": 0,
+    "Green": 0,
+    "Yellow": 0,
+  }
+  for (let i = 0; i < playerCards.length; i++) {
+    if (!playerCards[i].color) {
+      throw new Error("color is undefinded");
+    }
+    if (playerCards[i].color != Color.Any) {
+      playerColorCount[playerCards[i].color!] += 1;
+    }
+  }
+  //sort the object by the amount of cards
+  const sortedColors = Object.keys(playerColorCount).sort(
+    (a, b) => playerColorCount[b] - playerColorCount[a]
+  );
+  //add each color, that has the most cards to the recommended cards, if more than one color has the most cards, add all of them
+  const colorsToAdd = Object.keys(playerColorCount).filter(
+    (color) => playerColorCount[color] == playerColorCount[sortedColors[0]]
+  );
+  //delete all cards from recomended, if they are not in the colors to add, if no cards in recomended after that, keep the old recomended
+  let oldRecomendedCards = [...recommendedCards];
+  recommendedCards = recommendedCards.filter((card) =>
+    colorsToAdd.includes(card.color!)
+  );
+  //add action cards, that can be layed, because that is keepplusand play actions task
+  for (let i = 0; i < playerCards.length; i++) {
+    if (playerCards[i].action) {
+      //if it can be layed
+      if (
+        playerCards[i].action == Action.Reverse ||
+        playerCards[i].action == Action.Skip
+      ) {
+        if (playerCards[i].action == LayedCards[LayedCards.length - 1].action) {
+          recommendedCards.push(playerCards[i]);
+        }
+      }
+      //if color matches
+      if (playerCards[i].color == LayedCards[LayedCards.length - 1].color) {
+        recommendedCards.push(playerCards[i]);
+      }
+      //if color is any
+      if (playerCards[i].color == Color.Any) {
+        recommendedCards.push(playerCards[i]);
+      }
+    }
+  }
+  if (recommendedCards.length == 0) {
+    recommendedCards = oldRecomendedCards;
+  }
+
+  // console.log(
+  //   "recommendedCards after colors: " +
+  //     JSON.stringify(recommendedCards, null, 2)
+  // );
+  //tactic: keep plus and play action
+  //remove all cards that are not reverse, skip, wild
+  oldRecomendedCards = [...recommendedCards];
+  recommendedCards = recommendedCards.filter(
+    (card) =>
+      card.action == Action.Reverse ||
+      card.action == Action.Skip ||
+      card.action == Action.Wild
+  );
+  //if no cards in recommended, keep the old recommended
+  if (recommendedCards.length == 0) {
+    recommendedCards = oldRecomendedCards;
+  }
+  //remove all +4 and +2
+  oldRecomendedCards = [...recommendedCards];
+  recommendedCards = recommendedCards.filter(
+    (card) => card.action != Action.DrawFour && card.action != Action.DrawTwo
+  );
+  //if no cards in recommended, keep the old recommended
+  if (recommendedCards.length == 0) {
+    recommendedCards = oldRecomendedCards;
+  }
+
+  // console.log(
+  //   "recommendedCards after action cards: " +
+  //     JSON.stringify(recommendedCards, null, 2)
+  // );
+  //play the first card in recommended cards
+  cardIndex = playerCards.indexOf(recommendedCards[0]);
+  //handle action cards
+  transformAnyColorCards(playerCards, cardIndex!);
+  //if color is still any, throw error
+  if (playerCards[cardIndex!].color == Color.Any) {
+    throw new Error("Color is still any");
+  }
+  return cardIndex;
 };
