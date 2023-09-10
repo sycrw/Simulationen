@@ -1,6 +1,4 @@
 import {
-  alwaysDraw,
-  bestTactic,
   bestTacticByExclucion,
   cardCounting,
   firstCard,
@@ -12,7 +10,6 @@ import {
 
 import { Game } from "./Classes/Game";
 import { Tactic } from "./types";
-import { before } from "node:test";
 import fs from "fs";
 
 //test all tactics against each other and save the results in a csv with the name of the tactic and the winrate
@@ -85,14 +82,61 @@ function testAllTactics() {
     );
   }
 }
+testBestTacticVsAll();
+function testBestTacticVsAll() {
+  const started = Date.now();
+  const tactics: Tactic[] = [
+    cardCounting,
+    firstCard,
+    keepManyColors,
+    keepManyActionCards,
+    playAllActionCards,
+    keepPlusCardsAndPlayAction,
+  ];
+  const csvHeading = "Tactic;BestTacticByExclucion\n";
+  fs.writeFileSync("resultsBestTactic.csv", csvHeading);
+  for (let i = 0; i < tactics.length; i++) {
+    const iterationStartTime = Date.now();
+    const inputTactics = [bestTacticByExclucion, tactics[i]];
+    const results = simulation(inputTactics);
+    const line = `${tactics[i].name};${results[
+      bestTacticByExclucion.name
+    ].toFixed(2)}\n`;
+    fs.appendFileSync("resultsBestTactic.csv", line);
+    console.log(
+      `\n${tactics[i].name} vs ${
+        bestTacticByExclucion.name
+      } finished at ${new Date().toLocaleTimeString()}
+      Time it took: ${Math.floor(
+        (Date.now() - iterationStartTime) / 1000 / 60
+      )}m ${Math.floor(
+        (Date.now() - iterationStartTime) / 1000 -
+          Math.floor((Date.now() - iterationStartTime) / 1000 / 60) * 60
+      )}s`
+    );
+    //log the time estimated time left
+    const timeElapsed = Date.now() - started;
+    const timePerIteration = timeElapsed / (i + 1);
+    const timeLeft = (tactics.length - i) * timePerIteration;
+    const timeLeftInMinutes = Math.floor(timeLeft / 1000 / 60);
+    const timeLeftInSeconds = Math.floor(
+      timeLeft / 1000 - timeLeftInMinutes * 60
+    );
+    console.log(
+      `Time left: ${timeLeftInMinutes.toFixed(0)}m ${timeLeftInSeconds.toFixed(
+        0
+      )}s`
+    );
+  }
+}
 
-simulation([bestTacticByExclucion, keepPlusCardsAndPlayAction]);
+// simulation([bestTacticByExclucion, keepPlusCardsAndPlayAction]);
 
 function simulation(inputTactics: Tactic[]) {
   //create a error.txt file and make a new line
   const startTime = Date.now();
-  //run the simulation a 20 Million times
-  const interations = 100000;
+
+  const interations = 10000000; //10000000 = 10 million
   const printInfoEvery = 1;
   let currentIteration = 0;
   const playersAmount = inputTactics.length;
