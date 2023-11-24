@@ -82,7 +82,7 @@ function testAllTactics() {
     );
   }
 }
-testBestTacticVsAll();
+// testBestTacticVsAll();
 function testBestTacticVsAll() {
   const started = Date.now();
   const tactics: Tactic[] = [
@@ -130,14 +130,14 @@ function testBestTacticVsAll() {
   }
 }
 
-// simulation([bestTacticByExclucion, keepPlusCardsAndPlayAction]);
+simulation([bestTacticByExclucion, firstCard]);
 
 function simulation(inputTactics: Tactic[]) {
   //create a error.txt file and make a new line
   const startTime = Date.now();
 
-  const interations = 10000000; //10000000 = 10 million
-  const printInfoEvery = 1;
+  const interations = 100_000;
+  const printInfoEvery = 50;
   let currentIteration = 0;
   const playersAmount = inputTactics.length;
   const tactics = inputTactics;
